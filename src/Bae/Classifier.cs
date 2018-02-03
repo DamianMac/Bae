@@ -36,15 +36,17 @@ namespace Bae
 
             foreach(var label in Indexes.Keys)
             {
+
+                var index = Indexes[label];
+                                
                 documentsInLabel[label] = Indexes[label].DocumentCount;
                 documentsNotInLabel[label] = DocumentCount - documentsInLabel[label];
             
-                var index = Indexes[label];
                 double logSum = 0;
 
                 foreach(var word in entry.Tokens)
                 {
-                    var totalWordCount = FindOccurrences(word);
+                    var totalWordCount = FindTotalOccurrences(word);
                     if ( totalWordCount == 0)
                         continue;
 
@@ -79,7 +81,7 @@ namespace Bae
             }
             return count;
         }
-        private int FindOccurrences(string word)
+        private int FindTotalOccurrences(string word)
         {
             int count = 0;
             foreach(var index in Indexes.Values)
